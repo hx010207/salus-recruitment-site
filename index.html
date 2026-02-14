@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SALUS CLUB — Elite Cybersecurity Community</title>
+    <meta name="description"
+        content="Join SALUS CLUB — The premier university cybersecurity and tech community at Jain University.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/NfkPr6gj/SALUS-MATTE-(1).png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js" defer></script>
+
+    <!-- NOTE: Three.js REMOVED — using PNG logo only -->
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"></div>
+
+    <!-- Binary Rain Background (Global, CSS-driven) -->
+    <div class="binary-rain" aria-hidden="true" id="binaryRain"></div>
+
+    <!-- TERMINAL LOADING SCREEN -->
+    <div id="terminalLoader" class="terminal-loader">
+        <div class="terminal-window">
+            <div class="terminal-bar">
+                <span class="t-dot t-red"></span>
+                <span class="t-dot t-yellow"></span>
+                <span class="t-dot t-green"></span>
+                <span class="t-bar-title">salus_init.sh</span>
+            </div>
+            <div class="terminal-body" id="termBody"></div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="#home" class="nav-brand">
+                <img src="https://i.postimg.cc/NfkPr6gj/SALUS-MATTE-(1).png" alt="SALUS" class="nav-logo logo-styled">
+                <span class="nav-name">SALUS</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#teams">Teams</a></li>
+                <li><a href="#benefits">Benefits</a></li>
+                <li><a href="#apply" class="nav-cta-link">Apply</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" class="hero">
+        <canvas id="heroCanvas" class="hero-particles"></canvas>
+        <!-- Blurred binary digits background layer -->
+        <div class="hero-binary-bg" id="heroBinaryBg" aria-hidden="true"></div>
+        <div class="hero-fade-bottom"></div>
+
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <p class="hero-tag">[ RECRUITMENT 2026 ]</p>
+                <h1>JOIN THE<br><span class="glow-blue">CYBER</span> REVOLUTION</h1>
+                <p class="hero-sub">SALUS CLUB is the elite community for cybersecurity, ethical hacking, and tech
+                    innovation. Secure the future with us.</p>
+                <div class="hero-btns">
+                    <a href="#apply" class="btn-fill">APPLY NOW <i data-lucide="chevron-right"></i></a>
+                    <a href="#about" class="btn-outline">LEARN MORE <i data-lucide="arrow-down-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Hero Logo (PNG Only — NO circle, NO ring) -->
+            <div class="hero-logo-wrap">
+                <img src="https://i.postimg.cc/NfkPr6gj/SALUS-MATTE-(1).png" alt="SALUS Club Logo"
+                    class="hero-logo-img logo-styled" id="heroLogo">
+            </div>
+        </div>
+
+        <div class="scroll-cue">
+            <span>SCROLL</span>
+            <div class="scroll-bar"></div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section-about">
+        <div class="container">
+            <div class="sec-head">
+                <h2>ABOUT <span class="glow-red">SALUS</span></h2>
+                <div class="head-rule"></div>
+            </div>
+
+            <div class="about-layout">
+                <div class="about-body">
+                    <p>
+                        <strong class="kw">Salus Cybersecurity Club</strong> is a dynamic student-led initiative from
+                        the
+                        <strong class="kw">Department of Cybersecurity</strong> at
+                        <strong class="kw">Jain (Deemed-to-be University)</strong>, FET, Kanakapura Road Campus.
+                        The club is dedicated to fostering <strong class="kw">technical excellence</strong> and
+                        professional growth in cybersecurity and related domains.
+                    </p>
+                    <p>
+                        We provide a structured environment where students develop practical skills in
+                        <strong class="kw">ethical hacking</strong>, <strong class="kw">network security</strong>,
+                        <strong class="kw">secure coding</strong>, <strong class="kw">digital forensics</strong>, and
+                        <strong class="kw">threat analysis</strong> through workshops, hands-on labs, competitions,
+                        and real-world projects.
+                    </p>
+                    <p>
+                        Our mission is to bridge the gap between academic learning and industry practices by encouraging
+                        applied learning, collaboration, and innovation. Salus focuses on building disciplined,
+                        <strong class="kw">industry-ready cybersecurity professionals</strong> who value responsibility,
+                        teamwork, and continuous learning.
+                    </p>
+                    <p>
+                        We also collaborate with organizations and industry experts to strengthen the
+                        <strong class="kw">cybersecurity ecosystem</strong>, creating opportunities for students to gain
+                        exposure, mentorship, networking, and career growth.
+                    </p>
+                </div>
+
+                <div class="about-cards">
+                    <div class="info-card">
+                        <div class="ic-icon"><i data-lucide="shield"></i></div>
+                        <div>
+                            <h4>MISSION</h4>
+                            <p>Bridge the gap between academic learning and real-world cybersecurity practices.</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="ic-icon"><i data-lucide="globe"></i></div>
+                        <div>
+                            <h4>VISION</h4>
+                            <p>Build disciplined, industry-ready cybersecurity professionals for a secure digital
+                                future.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAMS — Horizontal Drag Scroll -->
+    <section id="teams" class="section-teams">
+        <div class="container-wide">
+            <div class="sec-head centered">
+                <h2>OUR <span class="glow-blue">TEAMS</span></h2>
+                <p class="sec-sub">FIND YOUR BATTLESTATION</p>
+            </div>
+
+            <div class="scroll-track" id="scrollTrack">
+                <div class="scroll-inner">
+                    <article class="t-card">
+                        <div class="t-icon"><i data-lucide="crown"></i></div>
+                        <h3>CORE TEAM</h3>
+                        <p>The central nerve of SALUS. Leadership, strategy, and operations management.</p>
+                        <div class="t-tags"><span>Leadership</span><span>Strategy</span></div>
+                        <div class="t-accent"></div>
+                    </article>
+
+                    <article class="t-card">
+                        <div class="t-icon"><i data-lucide="code-2"></i></div>
+                        <h3>TECH TEAM</h3>
+                        <p>Exploit vulnerabilities, build security tools, and solve CTF challenges. The hackers.</p>
+                        <div class="t-tags"><span>DevSecOps</span><span>CTFs</span></div>
+                        <div class="t-accent"></div>
+                    </article>
+
+                    <article class="t-card">
+                        <div class="t-icon"><i data-lucide="palette"></i></div>
+                        <h3>DESIGN TEAM</h3>
+                        <p>Crafting the visual identity. UI/UX, graphics, and branding for the digital age.</p>
+                        <div class="t-tags"><span>UI/UX</span><span>Branding</span></div>
+                        <div class="t-accent"></div>
+                    </article>
+
+                    <article class="t-card">
+                        <div class="t-icon"><i data-lucide="megaphone"></i></div>
+                        <h3>MARKETING TEAM</h3>
+                        <p>Spreading the signal. Social media, content creation, and community outreach.</p>
+                        <div class="t-tags"><span>Socials</span><span>Content</span></div>
+                        <div class="t-accent"></div>
+                    </article>
+
+                    <article class="t-card">
+                        <div class="t-icon"><i data-lucide="calendar-check"></i></div>
+                        <h3>EVENTS TEAM</h3>
+                        <p>Orchestrating hackathons, workshops, and bootcamps. The logistics engine.</p>
+                        <div class="t-tags"><span>Logistics</span><span>Planning</span></div>
+                        <div class="t-accent"></div>
+                    </article>
+                </div>
+            </div>
+            <p class="drag-label"><i data-lucide="grip-horizontal"></i> Drag to explore</p>
+        </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section id="benefits" class="section-benefits">
+        <div class="container">
+            <div class="ben-layout">
+                <div class="ben-left">
+                    <h2>WHY <span class="glow-red">JOIN?</span></h2>
+                    <p>Upgrade your skillset. Expand your network.</p>
+                </div>
+                <div class="ben-right">
+                    <div class="ben-row"><span class="ben-n">01</span>
+                        <div>
+                            <h4>SKILLS</h4>
+                            <p>Hands-on experience with industry tools.</p>
+                        </div>
+                    </div>
+                    <div class="ben-row"><span class="ben-n">02</span>
+                        <div>
+                            <h4>NETWORKING</h4>
+                            <p>Connect with professionals and alumni.</p>
+                        </div>
+                    </div>
+                    <div class="ben-row"><span class="ben-n">03</span>
+                        <div>
+                            <h4>PROJECTS</h4>
+                            <p>Build real-world security solutions.</p>
+                        </div>
+                    </div>
+                    <div class="ben-row"><span class="ben-n">04</span>
+                        <div>
+                            <h4>CERTIFICATES</h4>
+                            <p>Official recognition for contributions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- APPLY -->
+    <section id="apply" class="section-apply">
+        <div class="container">
+            <div class="sec-head centered">
+                <h2>INITIATE <span class="glow-blue">APPLICATION</span></h2>
+                <p class="sec-sub">Fill the form below to begin.</p>
+            </div>
+
+            <div class="form-box">
+                <!-- PASTE YOUR GOOGLE FORM LINK BELOW (replace the src) -->
+                <iframe src="PASTE_GOOGLE_FORM_LINK_HERE" width="100%" height="800" frameborder="0"
+                    title="SALUS Recruitment Form" loading="lazy" class="gform">Loading…</iframe>
+            </div>
+            <div class="form-fallback">
+                <p>Form not loading?</p>
+                <!-- Also paste your Google Form link in the href below -->
+                <a href="PASTE_GOOGLE_FORM_LINK_HERE" target="_blank" rel="noopener" class="btn-outline sm">OPEN IN NEW
+                    TAB <i data-lucide="external-link"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="foot-brand">
+                <img src="https://i.postimg.cc/NfkPr6gj/SALUS-MATTE-(1).png" alt="SALUS" class="foot-logo logo-styled">
+                <div>
+                    <h3>SALUS CLUB</h3>
+                    <p>Securing the Digital Frontier.</p>
+                </div>
+            </div>
+            <div class="foot-socials">
+                <!-- EDITABLE: Replace # with your social URLs -->
+                <a href="https://www.instagram.com/salus.fetju?igsh=anJ3MGI2ZWM5dHM4" target="_blank" rel="noopener"
+                    aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                <a href="https://www.linkedin.com/in/salus-fet-504537380?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                    target="_blank" rel="noopener" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                <a href="mailto:salus.fet@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
+            </div>
+            <p class="foot-copy">&copy; 2026 SALUS CLUB. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
