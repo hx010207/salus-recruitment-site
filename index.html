@@ -166,60 +166,71 @@
         </div>
     </section>
 
-    <!-- TEAMS — Horizontal Drag Scroll -->
+    <!-- TEAMS — Vertical Stacked Layout -->
     <section id="teams" class="section-teams">
-        <div class="container-wide">
+        <div class="container">
             <div class="sec-head centered">
                 <h2>OUR <span class="glow-blue">TEAMS</span></h2>
                 <p class="sec-sub">FIND YOUR BATTLESTATION</p>
             </div>
 
-            <div class="scroll-track" id="scrollTrack">
-                <div class="scroll-inner">
-                    <article class="t-card">
-                        <div class="t-icon"><i data-lucide="crown"></i></div>
-                        <h3>CORE TEAM</h3>
-                        <p>The central nerve of SALUS. Leadership, strategy, and operations management.</p>
-                        <div class="t-tags"><span>Leadership</span><span>Strategy</span></div>
-                        <div class="t-accent"></div>
-                    </article>
+            <div class="teams-stack" id="teamsStack">
+                <article class="t-card" data-team="core"
+                    data-desc="Leads strategy, operations, and decision-making. Coordinates all teams and ensures smooth execution of initiatives.">
+                    <div class="t-icon"><i data-lucide="crown"></i></div>
+                    <h3>CORE TEAM</h3>
+                    <p>Leads strategy, operations, and decision-making across the club.</p>
+                    <div class="t-tags"><span>Leadership</span><span>Strategy</span></div>
+                    <div class="t-accent"></div>
+                </article>
 
-                    <article class="t-card">
-                        <div class="t-icon"><i data-lucide="code-2"></i></div>
-                        <h3>TECH TEAM</h3>
-                        <p>Exploit vulnerabilities, build security tools, and solve CTF challenges. The hackers.</p>
-                        <div class="t-tags"><span>DevSecOps</span><span>CTFs</span></div>
-                        <div class="t-accent"></div>
-                    </article>
+                <article class="t-card" data-team="tech"
+                    data-desc="Develops tools, maintains platforms, creates CTF challenges, and supports technical cybersecurity work.">
+                    <div class="t-icon"><i data-lucide="code-2"></i></div>
+                    <h3>TECH TEAM</h3>
+                    <p>Develops tools, maintains platforms, and creates CTF challenges.</p>
+                    <div class="t-tags"><span>DevSecOps</span><span>CTFs</span></div>
+                    <div class="t-accent"></div>
+                </article>
 
-                    <article class="t-card">
-                        <div class="t-icon"><i data-lucide="palette"></i></div>
-                        <h3>DESIGN TEAM</h3>
-                        <p>Crafting the visual identity. UI/UX, graphics, and branding for the digital age.</p>
-                        <div class="t-tags"><span>UI/UX</span><span>Branding</span></div>
-                        <div class="t-accent"></div>
-                    </article>
+                <article class="t-card" data-team="design"
+                    data-desc="Handles UI/UX, graphics, branding, and visual assets for platforms, events, and social media.">
+                    <div class="t-icon"><i data-lucide="palette"></i></div>
+                    <h3>DESIGN TEAM</h3>
+                    <p>Handles UI/UX, graphics, branding, and visual assets.</p>
+                    <div class="t-tags"><span>UI/UX</span><span>Branding</span></div>
+                    <div class="t-accent"></div>
+                </article>
 
-                    <article class="t-card">
-                        <div class="t-icon"><i data-lucide="megaphone"></i></div>
-                        <h3>MARKETING TEAM</h3>
-                        <p>Spreading the signal. Social media, content creation, and community outreach.</p>
-                        <div class="t-tags"><span>Socials</span><span>Content</span></div>
-                        <div class="t-accent"></div>
-                    </article>
+                <article class="t-card" data-team="marketing"
+                    data-desc="Manages outreach, social media, promotions, and communication to grow engagement and visibility.">
+                    <div class="t-icon"><i data-lucide="megaphone"></i></div>
+                    <h3>MARKETING TEAM</h3>
+                    <p>Manages outreach, social media, promotions, and engagement.</p>
+                    <div class="t-tags"><span>Socials</span><span>Content</span></div>
+                    <div class="t-accent"></div>
+                </article>
 
-                    <article class="t-card">
-                        <div class="t-icon"><i data-lucide="calendar-check"></i></div>
-                        <h3>EVENTS TEAM</h3>
-                        <p>Orchestrating hackathons, workshops, and bootcamps. The logistics engine.</p>
-                        <div class="t-tags"><span>Logistics</span><span>Planning</span></div>
-                        <div class="t-accent"></div>
-                    </article>
-                </div>
+                <article class="t-card" data-team="events"
+                    data-desc="Organizes hackathons, workshops, and sessions. Handles planning, coordination, and event logistics.">
+                    <div class="t-icon"><i data-lucide="calendar-check"></i></div>
+                    <h3>EVENT MANAGEMENT TEAM</h3>
+                    <p>Organizes hackathons, workshops, sessions, and event logistics.</p>
+                    <div class="t-tags"><span>Logistics</span><span>Planning</span></div>
+                    <div class="t-accent"></div>
+                </article>
             </div>
-            <p class="drag-label"><i data-lucide="grip-horizontal"></i> Drag to explore</p>
         </div>
     </section>
+
+    <!-- TEAM MODAL -->
+    <div class="team-modal-overlay" id="teamModalOverlay">
+        <div class="team-modal" id="teamModal">
+            <button class="team-modal-close" id="teamModalClose" aria-label="Close">&times;</button>
+            <h3 class="team-modal-title" id="teamModalTitle"></h3>
+            <p class="team-modal-desc" id="teamModalDesc"></p>
+        </div>
+    </div>
 
     <!-- BENEFITS -->
     <section id="benefits" class="section-benefits">
@@ -269,13 +280,16 @@
 
             <div class="form-box">
                 <!-- PASTE YOUR GOOGLE FORM LINK BELOW (replace the src) -->
-                <iframe src="PASTE_GOOGLE_FORM_LINK_HERE" width="100%" height="800" frameborder="0"
-                    title="SALUS Recruitment Form" loading="lazy" class="gform">Loading…</iframe>
+                <iframe
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSdbAWWnpyp7HhJhL4NirNAn2kBkvXzhoM2RZIrkw-ixmezTfQ/viewform?usp=header"
+                    width="100%" height="800" frameborder="0" title="SALUS Recruitment Form" loading="lazy"
+                    class="gform">Loading…</iframe>
             </div>
             <div class="form-fallback">
-                <p>Form not loading?</p>
+                <p></p>
                 <!-- Also paste your Google Form link in the href below -->
-                <a href="PASTE_GOOGLE_FORM_LINK_HERE" target="_blank" rel="noopener" class="btn-outline sm">OPEN IN NEW
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdbAWWnpyp7HhJhL4NirNAn2kBkvXzhoM2RZIrkw-ixmezTfQ/viewform?usp=header"
+                    target="_blank" rel="noopener" class="btn-outline sm">OPEN IN NEW
                     TAB <i data-lucide="external-link"></i></a>
             </div>
         </div>
@@ -298,6 +312,8 @@
                 <a href="https://www.linkedin.com/in/salus-fet-504537380?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                     target="_blank" rel="noopener" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
                 <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+
+
                 <a href="mailto:salus.fet@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
             </div>
             <p class="foot-copy">&copy; 2026 SALUS CLUB. All rights reserved.</p>

@@ -130,18 +130,20 @@
     /* ============ CUSTOM CURSOR ============ */
     const dot = document.querySelector('.cursor-dot');
     const ring = document.querySelector('.cursor-ring');
-    let mx = 0, my = 0, dx = 0, dy = 0, rx = 0, ry = 0;
+    let mx = 0, my = 0, rx = 0, ry = 0;
 
     if (!isMobile && dot && ring) {
-        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-        (function tickCursor() {
-            dx += (mx - dx) * 0.25;
-            dy += (my - dy) * 0.25;
-            rx += (mx - rx) * 0.12;
-            ry += (my - ry) * 0.12;
-            dot.style.transform = 'translate(' + (dx - 3) + 'px,' + (dy - 3) + 'px)';
-            ring.style.transform = 'translate(' + (rx - 18) + 'px,' + (ry - 18) + 'px)';
-            requestAnimationFrame(tickCursor);
+        // Dot: instant 1:1 tracking on mousemove — zero lag
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX; my = e.clientY;
+            dot.style.transform = 'translate3d(' + (mx - 3) + 'px,' + (my - 3) + 'px, 0)';
+        });
+        // Ring: fast lerp (0.45) for snappy trailing feel
+        (function tickRing() {
+            rx += (mx - rx) * 0.45;
+            ry += (my - ry) * 0.45;
+            ring.style.transform = 'translate3d(' + (rx - 18) + 'px,' + (ry - 18) + 'px, 0)';
+            requestAnimationFrame(tickRing);
         })();
     }
 
@@ -260,23 +262,92 @@
             });
         });
 
-        gsap.utils.toArray('.t-card').forEach((el, i) => {
-            gsap.from(el, {
-                scrollTrigger: { trigger: el, start: 'top 90%' },
-                x: 50, opacity: 0, duration: 0.6, delay: i * 0.08, ease: 'power2.out'
+        /* t-card animation handled by initTeamStack below */
+    }
+
+    /* ============ TEAM STACKED CARDS ANIMATION ============ */
+    function initTeamStack() {
+        const container = document.getElementById('teamsStack');
+        const cards = gsap.utils.toArray('#teamsStack .t-card');
+        if (!container || !cards.length || !window.gsap || !window.ScrollTrigger) return;
+
+        const GAP = 24; // spacing between cards when unstacked
+        const STACK_OFFSET = 28; // vertical offset per card when stacked
+        const SCALE_STEP = 0.04; // scale decrease per card when stacked
+
+        // Measure card height (all cards roughly same size)
+        // Temporarily make first card relative to measure
+        cards[0].style.position = 'relative';
+        const cardH = cards[0].offsetHeight;
+        cards[0].style.position = '';
+
+        // Total height when fully spread
+        const totalH = cards.length * cardH + (cards.length - 1) * GAP;
+        container.style.height = totalH + 'px';
+
+        // Set initial stacked state
+        cards.forEach((card, i) => {
+            gsap.set(card, {
+                y: i * STACK_OFFSET,
+                scale: 1 - i * SCALE_STEP,
+                zIndex: cards.length - i,
+                opacity: i === 0 ? 1 : Math.max(0.5, 1 - i * 0.12)
             });
+        });
+
+        // ScrollTrigger scrub timeline — reverses on scroll up
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: container,
+                start: 'top 65%',
+                end: 'top 5%',
+                scrub: 0.5,
+            }
+        });
+
+        cards.forEach((card, i) => {
+            tl.to(card, {
+                y: i * (cardH + GAP),
+                scale: 1,
+                opacity: 1,
+                duration: 1,
+                ease: 'none'
+            }, i * 0.12);
         });
     }
 
-    /* ============ DRAG SCROLL (TEAMS) ============ */
-    function initDragScroll() {
-        const track = document.getElementById('scrollTrack');
-        if (!track) return;
-        let down = false, sx, sl;
-        track.addEventListener('mousedown', e => { down = true; track.style.cursor = 'grabbing'; sx = e.pageX - track.offsetLeft; sl = track.scrollLeft; });
-        track.addEventListener('mouseleave', () => { down = false; track.style.cursor = 'grab'; });
-        track.addEventListener('mouseup', () => { down = false; track.style.cursor = 'grab'; });
-        track.addEventListener('mousemove', e => { if (!down) return; e.preventDefault(); track.scrollLeft = sl - (e.pageX - track.offsetLeft - sx) * 1.8; });
+    /* ============ TEAM MODAL ============ */
+    function initTeamModal() {
+        const overlay = document.getElementById('teamModalOverlay');
+        const modal = document.getElementById('teamModal');
+        const modalTitle = document.getElementById('teamModalTitle');
+        const modalDesc = document.getElementById('teamModalDesc');
+        const closeBtn = document.getElementById('teamModalClose');
+        if (!overlay || !modal) return;
+
+        function openModal(card) {
+            const title = card.querySelector('h3').textContent;
+            const desc = card.getAttribute('data-desc');
+            modalTitle.textContent = title;
+            modalDesc.textContent = desc;
+            overlay.classList.add('active');
+        }
+
+        function closeModal() {
+            overlay.classList.remove('active');
+        }
+
+        document.querySelectorAll('.t-card').forEach(card => {
+            card.addEventListener('click', () => openModal(card));
+        });
+
+        closeBtn.addEventListener('click', closeModal);
+        overlay.addEventListener('click', e => {
+            if (e.target === overlay) closeModal();
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && overlay.classList.contains('active')) closeModal();
+        });
     }
 
     /* ============ MAGNETIC BUTTONS ============ */
@@ -297,7 +368,8 @@
     window.addEventListener('load', () => {
         initLenis();
         initScrollAnims();
-        initDragScroll();
+        initTeamStack();
+        initTeamModal();
         initMagnetic();
     });
 
